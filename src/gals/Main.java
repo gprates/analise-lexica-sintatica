@@ -4,19 +4,14 @@ import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-// Uso: java gals.Main programa.txt   (ou sem argumento para ler da entrada padrão)
-// Se o programa usar "capturar", passe o programa por arquivo: o teclado fica livre para digitar os valores.
 public class Main
 {
     public static void main(String[] args) throws Exception
     {
-        Reader entrada = args.length > 0
-            ? new FileReader(args[0])
-            : new InputStreamReader(System.in);
-
-        Lexico lexico = new Lexico(entrada);
+        Lexico lexico = new Lexico(new FileReader("src/teste.txt"));
         Sintatico sintatico = new Sintatico();
         Semantico semantico = new Semantico();
+        sintatico.parse(lexico, semantico);
 
         try
         {
